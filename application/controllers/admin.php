@@ -27,6 +27,7 @@ class Admin extends CI_Controller{
 		$ordertype = $this->input->post('ordertype');
 		if ( $ordertype == '' ) $ordertype = 'asc';
 		$data['query'] = $this->M_book->get('bookinfo', $order, $ordertype);
+		$data['idToNameU'] = $this->M_book->idToName('user');
 		$this->load->view('admin_bookview', $data);
 	}
 	function booksearch(){
@@ -35,7 +36,11 @@ class Admin extends CI_Controller{
 		$data['heading'] = "查询结果";
 		$item = $this->input->post('search');
 		$type = $this->input->post('type');
-		if($item == '') $data['blank'] = 1;
+		$data['idToNameU'] = $this->M_book->idToName('user');
+		if( $type == 'owner' ) {
+			$item = $data['idToNameU'][$item];
+		}	
+		if( $item == '' ) $data['blank'] = 1;
 		else {
 			$data['post'] = $this->M_book->booksearch($item, $type);
 			$data['blank'] = 0;
@@ -51,6 +56,8 @@ class Admin extends CI_Controller{
 		$ordertype = $this->input->post('ordertype');
 		if ( $ordertype == '' ) $ordertype = 'asc';
 		$data['query'] = $this->M_book->get('tradeinfo', $order, $ordertype);
+		$data['idToNameU'] = $this->M_book->idToName('user');
+		$data['idToNameB'] = $this->M_book->idToName('book');
 		$this->load->view('admin_tradeview', $data);
 	}
 	function tradesearch(){
@@ -59,6 +66,11 @@ class Admin extends CI_Controller{
 		$data['heading'] = "查询结果";
 		$item = $this->input->post('search');
 		$type = $this->input->post('type');
+		$data['idToNameU'] = $this->M_book->idToName('user');
+		$data['idToNameB'] = $this->M_book->idToName('book');
+		if ( $type == 'owner' || $type == 'buyer' ) {
+			$item = $data['idToNameU'][$item];
+		}
 		if($item == '') $data['blank'] = 1;
 		else {
 			$data['post'] = $this->M_book->tradesearch($item, $type);

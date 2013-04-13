@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.1
+-- version 3.4.10.1deb1
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2013 年 04 月 10 日 12:09
--- 服务器版本: 5.5.24-log
--- PHP 版本: 5.4.3
+-- 生成日期: 2013 年 04 月 13 日 23:26
+-- 服务器版本: 5.5.29
+-- PHP 版本: 5.3.10-1ubuntu3.6
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -48,15 +48,15 @@ INSERT INTO `admin` (`adminid`, `username`, `password`) VALUES
 
 CREATE TABLE IF NOT EXISTS `bookinfo` (
   `bookid` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) NOT NULL,
+  `bookname` varchar(100) NOT NULL,
   `price` float(6,2) NOT NULL DEFAULT '0.00',
-  `owner` varchar(100) NOT NULL,
   `ownerid` int(11) NOT NULL,
   `createdate` int(11) NOT NULL,
   `image` varchar(100) NOT NULL,
   `author` varchar(100) NOT NULL,
   `ISBN` varchar(100) NOT NULL,
   `press` varchar(100) NOT NULL,
+  `state` int(11) NOT NULL,
   PRIMARY KEY (`bookid`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
@@ -64,9 +64,9 @@ CREATE TABLE IF NOT EXISTS `bookinfo` (
 -- 转存表中的数据 `bookinfo`
 --
 
-INSERT INTO `bookinfo` (`bookid`, `name`, `price`, `owner`, `ownerid`, `createdate`, `image`, `author`, `ISBN`, `press`) VALUES
-(1, '精通正则表达式', 89.00, 'jsl', 2, 0, '', 'Jeffrey E.F. Friedl', '978-7-121-17501-5', '电子工业出版社'),
-(2, 'HTTP权威指南', 109.00, 'jsl9208', 1, 0, '', 'David', 'xxx', '人民邮电出版社');
+INSERT INTO `bookinfo` (`bookid`, `bookname`, `price`, `ownerid`, `createdate`, `image`, `author`, `ISBN`, `press`, `state`) VALUES
+(1, '精通正则表达式', 89.00, 2, 0, '', 'Jeffrey E.F. Friedl', '978-7-121-17501-5', '电子工业出版社', 1),
+(2, 'HTTP权威指南', 109.00, 1, 0, '', 'David', 'xxx', '人民邮电出版社', 0);
 
 -- --------------------------------------------------------
 
@@ -75,12 +75,9 @@ INSERT INTO `bookinfo` (`bookid`, `name`, `price`, `owner`, `ownerid`, `createda
 --
 
 CREATE TABLE IF NOT EXISTS `tradeinfo` (
-  `bookname` varchar(100) NOT NULL,
   `tradeid` int(11) NOT NULL AUTO_INCREMENT,
   `bookid` int(11) NOT NULL,
-  `owner` varchar(100) NOT NULL,
   `ownerid` int(11) NOT NULL,
-  `buyer` varchar(100) NOT NULL,
   `buyerid` int(11) NOT NULL,
   `state` int(11) NOT NULL,
   `createdate` int(11) NOT NULL,
@@ -92,8 +89,8 @@ CREATE TABLE IF NOT EXISTS `tradeinfo` (
 -- 转存表中的数据 `tradeinfo`
 --
 
-INSERT INTO `tradeinfo` (`bookname`, `tradeid`, `bookid`, `owner`, `ownerid`, `buyer`, `buyerid`, `state`, `createdate`, `price`) VALUES
-('精通正则表达式', 1, 1, 'jsl', 2, 'jsl9208', 1, 1, 0, 89.00);
+INSERT INTO `tradeinfo` (`tradeid`, `bookid`, `ownerid`, `buyerid`, `state`, `createdate`, `price`) VALUES
+(1, 1, 2, 1, 1, 0, 89.00);
 
 -- --------------------------------------------------------
 

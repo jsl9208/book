@@ -26,19 +26,21 @@
 								<th>ISBN</th>
 								<th>发布人</th>
 								<th>添加时间</th>
+								<th>状态</th>
 							</tr>
 						</thead>
 						<tbody>
 							<?php foreach ($post->result() as $row ) {?>
 							<tr>
 								<td><?php echo $row->bookid?></td>
-								<td><?php echo $row->name?></td>
+								<td><?php echo $row->bookname?></td>
 								<td><?php echo $row->author?></td>
 								<td><?php echo $row->press?></td>
 								<td><?php echo $row->price?></td>
 								<td><?php echo $row->ISBN?></td>
-								<td><?php echo $row->owner?></td>
+								<td><?php echo $idToNameU[$row->ownerid]?></td>
 								<td><?php echo date('Y-m-d', $row->createdate)?></td>
+								<td><?php if ($row->state) echo "卖出"; else echo "待售";?></td>
 							</tr>
 							<?php } ?>
 						</tbody>
@@ -47,7 +49,7 @@
 				<?php }
 				else echo "没有匹配的条目！";
 				?>
-				<a href="<?php echo site_url('admin') ?>">返回</a>
+				<a href="<?php echo site_url('admin/bookview') ?>">返回</a>
 			</div>
 		</div>
 	</body>

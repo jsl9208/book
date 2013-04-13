@@ -32,9 +32,9 @@
 							<tr>
 								<td><?php echo $row->tradeid?></td>
 								<td><?php echo $row->bookid?></td>
-								<td><?php echo $row->bookname?></td>
-								<td><?php echo $row->owner?></td>
-								<td><?php echo $row->buyer?></td>
+								<td><?php echo $idToNameB[$row->bookid]?></td>
+								<td><?php echo $idToNameU[$row->ownerid]?></td>
+								<td><?php echo $idToNameU[$row->buyerid]?></td>
 								<td><?php echo $row->price?></td>
 								<td><?php echo date("Y-m-d", $row->createdate)?></td>
 							</tr>

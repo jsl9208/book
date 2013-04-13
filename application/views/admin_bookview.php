@@ -36,12 +36,12 @@
 							排序：按
 							<select name="order" id="order">
 								<option value="bookid">编号</option>
-								<option value="name">书名</option>
+								<option value="bookname">书名</option>
 								<option value="author">作者</option>
 								<option value="press">出版社</option>
 								<option value="ISBN">ISBN</option>
-								<option value="owner">卖家ID</option>
 								<option value="createdate">添加时间</option>
+								<option value="state">状态</option>
 							</select>
 							<select name="ordertype" id="ordertype">
 								<option value="asc">升序</option>
@@ -65,19 +65,21 @@
 						<th>ISBN</th>
 						<th>卖家ID</th>
 						<th>添加时间</th>
+						<th>状态</th>
 					</tr>
 				</thead>
 				<tbody>
 					<?php foreach ($query->result() as $row ) {?>
 					<tr>
 						<td><?php echo $row->bookid?></td>
-						<td><?php echo $row->name?></td>
+						<td><?php echo $row->bookname?></td>
 						<td><?php echo $row->author?></td>
 						<td><?php echo $row->press?></td>
 						<td><?php echo $row->price?></td>
 						<td><?php echo $row->ISBN?></td>
-						<td><?php echo $row->owner?></td>
+						<td><?php echo $idToNameU[$row->ownerid]?></td>
 						<td><?php echo date("Y-m-d", $row->createdate)?></td>
+						<td><?php if ($row->state) echo "卖出"; else echo "待售";?></td>
 					</tr>
 					<?php } ?>
 				</tbody>

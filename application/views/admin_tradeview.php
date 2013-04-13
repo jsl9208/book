@@ -36,9 +36,6 @@
 							<select name="order" id="order">
 								<option value="tradeid">交易编号</option>
 								<option value="bookid">图书编号</option>
-								<option value="bookname">书名</option>
-								<option value="owner">卖家ID</option>
-								<option value="buyer">买家ID</option>
 								<option value="price">成交价格</option>
 								<option value="createdate">添加时间</option>
 							</select>
@@ -70,9 +67,9 @@
 					<tr>
 						<td><?php echo $row->tradeid?></td>
 						<td><?php echo $row->bookid?></td>
-						<td><?php echo $row->bookname?></td>
-						<td><?php echo $row->owner?></td>
-						<td><?php echo $row->buyer?></td>
+						<td><?php echo $idToNameB[$row->bookid]?></td>
+						<td><?php echo $idToNameU[$row->ownerid]?></td>
+						<td><?php echo $idToNameU[$row->buyerid]?></td>
 						<td><?php echo $row->price?></td>
 						<td><?php echo date("Y-m-d", $row->createdate)?></td>
 					</tr>
